@@ -1,0 +1,25 @@
+library(shiny)
+library(ggplot2)
+
+ui <- fluidPage("Productivity Application", sliderInput(inputId = "num", label = "How Many Hours Did I Study Today?", min = 0, max = 10, value = 10),
+                checkboxGroupInput("variable", "Check Yes If You...",
+                                   c("Meditated" = "med",
+                                     "Worked Out" = "worked",
+                                     "Ate Healthy" = "a",
+                                     "Walked the Dog")),
+                actionButton(inputId = "clicks", label = "Submit"),
+                plotOutput("hist", click = "plot_click"),
+                tags$img(height = 50,
+                         src = "http://www.rstudio.com/images/RStudio.2x.png")
+                )
+
+server <- function(input, output) {
+  observeEvent(input$clicks, {
+    print(as.numeric(input$clicks))
+  })
+  output$hist <- renderPlot({
+    hist(rnorm(input$num))
+  })
+}
+
+shinyApp(ui = ui, server = server)
