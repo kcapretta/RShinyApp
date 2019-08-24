@@ -1,2 +1,4 @@
 # RShinyApp
-My first interactive app, built through R's Shiny package
+My first interactive app, built through R's Shiny package.
+
+
